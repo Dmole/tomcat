@@ -871,6 +871,9 @@ public class Request implements HttpServletRequest {
         if (attr != null) {
             return attr;
         }
+        if ("connectionId".equals(name)) {
+            return getServletConnection().getConnectionId();
+        }
         if (!sslAttributesParsed && TLSUtil.isTLSRequestAttribute(name)) {
             coyoteRequest.action(ActionCode.REQ_SSL_ATTRIBUTE, coyoteRequest);
             attr = coyoteRequest.getAttribute(Globals.CERTIFICATES_ATTR);
